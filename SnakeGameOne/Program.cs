@@ -10,6 +10,7 @@ namespace SnakeGameOne
 {
     class Program
     {
+        //new comment;
         static readonly int gridW = 90;
         static readonly int gridH = 25;
         static Cell[,] grid = new Cell[gridH, gridW];
