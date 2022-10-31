@@ -11,7 +11,7 @@ namespace SnakeGameOne
     class Program
     {
         static readonly int gridW = 100;
-        static readonly int gridH = 30;
+        static readonly int gridH = 35;
         static Cell[,] grid = new Cell[gridH, gridW];
         static Cell currentCell;
         static Cell food;
@@ -22,7 +22,7 @@ namespace SnakeGameOne
         static bool Lost = false;
         static int snakeLength;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (!Populated)
             {
@@ -127,7 +127,8 @@ namespace SnakeGameOne
             snakeLength += 1;
             addFood();
         }
-
+        
+        /// movimientos
         static void goUp()
         {
             if (direction == 2)
