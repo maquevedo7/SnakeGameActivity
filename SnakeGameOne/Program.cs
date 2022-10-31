@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnakeGameOne.entities;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -62,7 +63,48 @@ namespace SnakeGameOne
             ConsoleKeyInfo input;
             while (!Console.KeyAvailable)
             {
-                Move();
+                ///Movimientos
+                if (direction == 0)
+                {
+                    //up
+                    if (grid[currentCell.y - 1, currentCell.x].val == "*")
+                    {
+                        Lose();
+                        return;
+                    }
+                    visitCell(grid[currentCell.y - 1, currentCell.x]);
+                }
+                else if (direction == 1)
+                {
+                    //right
+                    if (grid[currentCell.y, currentCell.x - 1].val == "*")
+                    {
+                        Lose();
+                        return;
+                    }
+                    visitCell(grid[currentCell.y, currentCell.x - 1]);
+                }
+                else if (direction == 2)
+                {
+                    //down
+                    if (grid[currentCell.y + 1, currentCell.x].val == "*")
+                    {
+                        Lose();
+                        return;
+                    }
+                    visitCell(grid[currentCell.y + 1, currentCell.x]);
+                }
+                else if (direction == 3)
+                {
+                    //left
+                    if (grid[currentCell.y, currentCell.x + 1].val == "*")
+                    {
+                        Lose();
+                        return;
+                    }
+                    visitCell(grid[currentCell.y, currentCell.x + 1]);
+                }
+                Thread.Sleep(speed * 100);
                 updateScreen();
             }
             input = Console.ReadKey();
@@ -93,17 +135,29 @@ namespace SnakeGameOne
         {
             switch (inp)
             {
-                case 'w':
-                    goUp();
+                case '8':
+                    ///goUp
+                    if (direction == 2)
+                        return;
+                    direction = 0;
                     break;
-                case 's':
-                    goDown();
+                case '5':
+                    ///goDown
+                    if (direction == 0)
+                        return;
+                    direction = 2;
                     break;
-                case 'a':
-                    goRight();
+                case '6':
+                    ///goLeft
+                    if (direction == 1)
+                    return;
+                    direction = 1;
                     break;
-                case 'd':
-                    goLeft();
+                case '4':
+                    ///goRight
+                    if (direction == 3)
+                        return;
+                    direction = 3;
                     break;
             }
         }
@@ -125,79 +179,6 @@ namespace SnakeGameOne
         {
             snakeLength += 1;
             addFood();
-        }
-
-        static void goUp()
-        {
-            if (direction == 2)
-                return;
-            direction = 0;
-        }
-
-        static void goRight()
-        {
-            if (direction == 3)
-                return;
-            direction = 1;
-        }
-
-        static void goDown()
-        {
-            if (direction == 0)
-                return;
-            direction = 2;
-        }
-
-        static void goLeft()
-        {
-            if (direction == 1)
-                return;
-            direction = 3;
-        }
-
-        static void Move()
-        {
-            if (direction == 0)
-            {
-                //up
-                if (grid[currentCell.y - 1, currentCell.x].val == "*")
-                {
-                    Lose();
-                    return;
-                }
-                visitCell(grid[currentCell.y - 1, currentCell.x]);
-            }
-            else if (direction == 1)
-            {
-                //right
-                if (grid[currentCell.y, currentCell.x - 1].val == "*")
-                {
-                    Lose();
-                    return;
-                }
-                visitCell(grid[currentCell.y, currentCell.x - 1]);
-            }
-            else if (direction == 2)
-            {
-                //down
-                if (grid[currentCell.y + 1, currentCell.x].val == "*")
-                {
-                    Lose();
-                    return;
-                }
-                visitCell(grid[currentCell.y + 1, currentCell.x]);
-            }
-            else if (direction == 3)
-            {
-                //left
-                if (grid[currentCell.y, currentCell.x + 1].val == "*")
-                {
-                    Lose();
-                    return;
-                }
-                visitCell(grid[currentCell.y, currentCell.x + 1]);
-            }
-            Thread.Sleep(speed * 100);
         }
 
         static void visitCell(Cell cell)
@@ -272,53 +253,6 @@ namespace SnakeGameOne
             }
             Console.WriteLine(toPrint);
         }
-        public class Cell
-        {
-            public string val
-            {
-                get;
-                set;
-            }
-            public int x
-            {
-                get;
-                set;
-            }
-            public int y
-            {
-                get;
-                set;
-            }
-            public bool visited
-            {
-                get;
-                set;
-            }
-            public int decay
-            {
-                get;
-                set;
-            }
-
-            public void decaySnake()
-            {
-                decay -= 1;
-                if (decay == 0)
-                {
-                    visited = false;
-                    val = " ";
-                }
-            }
-
-            public void Clear()
-            {
-                val = " ";
-            }
-
-            public void Set(string newVal)
-            {
-                val = newVal;
-            }
-        }
+        
     }
 }
