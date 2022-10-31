@@ -9,8 +9,8 @@ namespace SnakeGameOne
 {
     class Program
     {
-        static readonly int gridW = 90;
-        static readonly int gridH = 25;
+        static readonly int gridW = 100;
+        static readonly int gridH = 30;
         static Cell[,] grid = new Cell[gridH, gridW];
         static Cell currentCell;
         static Cell food;
@@ -93,16 +93,16 @@ namespace SnakeGameOne
         {
             switch (inp)
             {
-                case 'w':
+                case '8':
                     goUp();
                     break;
-                case 's':
+                case '5':
                     goDown();
                     break;
-                case 'a':
+                case '6':
                     goRight();
                     break;
-                case 'd':
+                case '4':
                     goLeft();
                     break;
             }
