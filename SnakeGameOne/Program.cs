@@ -162,18 +162,22 @@ namespace SnakeGameOne
             }
         }
 
-        static void addFood()
+        public class methods
         {
-            Random r = new Random();
-            Cell cell;
-            while (true)
-            {
-                cell = grid[r.Next(grid.GetLength(0)), r.Next(grid.GetLength(1))];
-                if (cell.val == " ")
-                    cell.val = "%";
-                break;
-            }
+
         }
+        //static void addFood()
+        //{
+        //    Random r = new Random();
+        //    Cell cell;
+        //    while (true)
+        //    {
+        //        cell = grid[r.Next(grid.GetLength(0)), r.Next(grid.GetLength(1))];
+        //        if (cell.val == " ")
+        //            cell.val = "%";
+        //        break;
+        //    }
+        //}
 
         static void eatFood()
         {
